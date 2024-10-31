@@ -1,11 +1,11 @@
-export interface INR_BALANCE {
+export interface INR_BALANCES_TYPE {
     [userId: string]: {
       balance: number;
       locked: number;
     };
   }
 
-export interface STOCK_BALANCE {
+export interface STOCK_BALANCES_TYPE {
     [userId: string]: {
         [name: string]: {
         yes?: {
@@ -20,7 +20,7 @@ export interface STOCK_BALANCE {
     };
 }
 
-export interface ORDERBOOKS{
+export interface ORDERBOOK_TYPE{
     [name:string]:{
         "yes":{
             [price:number]:{
@@ -43,9 +43,4 @@ export interface ORDERBOOKS{
             }
         }
     }
-}
-
-export interface ON_RAMP_REQUEST {
-    userId: string;
-    amount: number;
 }

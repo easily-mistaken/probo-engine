@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { ORDERBOOK } from "../config/global";
 
 export const buyOrder = (req: Request, res: Response) => {
     console.log("Buy order");
@@ -9,5 +10,5 @@ export const sellOrder = (req: Request, res: Response) => {
 };
 
 export const getOrderBook = (req: Request, res: Response) => {
-    console.log("View orders");
+    res.send({ data: ORDERBOOK });
 };

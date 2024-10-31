@@ -3,3 +3,10 @@ export interface ON_RAMP_REQUEST {
     amount: number;
 }
 
+export interface ORDER_REQUEST {
+    userId: string;
+    stockSymbol: string;
+    quantity: number;
+    price: number;
+    stockType: string;
+}

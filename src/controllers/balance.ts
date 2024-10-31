@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { INR_BALANCES, STOCK_BALANCES } from "../config/global";
 import { ON_RAMP_REQUEST } from "../interfaces/requestModels";
 
+// Get INR Balance
 export const getInrBalances = (req: Request, res: Response) => {
     res.send({ data: INR_BALANCES});
 };
@@ -19,6 +20,7 @@ export const getInrBalanceByUserId = (req: Request, res: Response) => {
     res.send({ data: { balance }});
 };
 
+// Get Stock Balance
 export const getStockBalances = (req: Request, res: Response) => {
     const userId: string = req.params.userId;
 
@@ -56,10 +58,21 @@ export const getStockBalances = (req: Request, res: Response) => {
     res.send({ data: STOCK_BALANCES[userId] });
 };
 
+// On Ramp Wallet
 export const onRamp = (req: Request, res: Response) => {
     const { userId, amount }: ON_RAMP_REQUEST = req.body;
     
-    INR_BALANCES[userId].balance += amount;
+    const userExists = INR_BALANCES[userId];
+
+    if (!userExists) {
+        res.send({ error: `User with ID ${userId} does not exist`});
+        return;
+    }
+
+    INR_BALANCES[userId].balance += amount; // Updating the User Balance
     const UpdatedBalance = INR_BALANCES[userId].balance;
-    res.send({data: {message: "Success", UpdatedBalance}});
+    res.send({
+        message: `Successfully added ${amount} to ${userId}'s wallet`,
+        UpdatedBalance
+    });
 };
